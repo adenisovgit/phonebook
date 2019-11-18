@@ -33,14 +33,12 @@ export default (usersById) => http.createServer((request, response) => {
       const list = Object.values(usersById);
       const totalPages = Math.floor(list.length / perPage);
       const startingElement = (page - 1) * perPage;
-      console.log(page, perPage, totalPages, startingElement, startingElement + perPage);
       const result = ({
         'meta': { page, perPage, totalPages },
         'data': list
           .slice(startingElement, startingElement + perPage)
           .map((el) => ({ 'name': el.name, 'phone': el.phone }))
       });
-      console.log(result);
       response.end(JSON.stringify(result));
       // END
     }
